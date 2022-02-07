@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
+import Sidebar from './Componets/Sidebar';
+import Createdata from './Componets/Create-data';
+import Changedata from './Componets/Changedata';
+import Viewdata from './Componets/Viewdata'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <div className='maindiv'>
+    <BrowserRouter>
+				<Routes>
+					<Route path="/" element={ <Sidebar/>}>
+						<Route path="/Createdata" element={<Createdata />} />
+						<Route path="/Changedata" element={<Changedata />} />
+						<Route path="/Viewdata" element={<Viewdata />} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
     </div>
+   
+    </>
   );
 }
 

@@ -1,0 +1,14 @@
+label{
+    text-align: center;
+    
+}
+.main-container1{
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+    border: 1x solid red;
+    padding: 20px;
+    border-radius: 25px;
+    height: 400px;
+    margin-left: 30%;
+}

@@ -1,0 +1,40 @@
+.main {
+	display: flex;
+    background-color: rgb(137, 245, 142);
+	border: 1px solid red;
+	border-radius: 10px;
+}
+.sidebar {
+	background-color: #e0f790;
+	margin-left: 5px;
+	height: 99vh;
+	width: 15vw;
+	box-shadow: 3px 5px 10px rgb(218, 5, 5);
+	border: 1px solid pink;
+	border-radius: 10px;
+}
+.menulist {
+	margin: 0;
+	padding: 0;
+}
+.dataitem{
+	list-style-type: none;
+	padding: 10px;
+	cursor: pointer;
+}
+.dataname {
+	font-size: 25px;
+}
+.dataitem:hover {
+	background-color: #dca3eb;
+	border: 2px solid rgb(218, 5, 238);
+	border-radius: 5px;
+	box-shadow: 3px 5px 10px rgb(218, 5, 5);
+
+}
+a {
+	display: block;
+	width: 100%;
+	text-decoration: none;
+	color: rgb(0, 0, 0);
+}
