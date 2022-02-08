@@ -31,6 +31,10 @@ export default function Viewdata(props) {
 }
 
 
+const editdata=()=>{
+  console.log(ViewData)
+}
+
   //console.log(userData);
 
   const ShowData = ViewData.map((data) => {
@@ -89,7 +93,7 @@ export default function Viewdata(props) {
         </div>
         <hr />
         <div className="sub">
-          <button name="" type="button" className="submitbtn" /* onClick={(e)=>editdata(e.target.value)} */>
+          <button name="" type="button" className="submitbtn" onClick={(e)=>editdata(e.target.value)}>
             Update Data
           </button>
         </div>

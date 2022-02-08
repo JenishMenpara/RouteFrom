@@ -1,6 +1,8 @@
 import React , {useState} from "react";
 import axios from "axios";
 import "./index.css";
+import Viewdata from "../Changedata";
+//import { Redirect } from 'react-router-dom'
 
 export default function Createdata() {
 
@@ -11,6 +13,7 @@ const [LastName, setLastName] = useState("");
 const [Age, setAge] = useState("");
 const [CheckBox, setCheckBox] = useState("");
 
+
 const savedata = ()=>{
   axios.post(url,{
     "FirstName" : FirstName,
@@ -20,7 +23,7 @@ const savedata = ()=>{
   }).then(Response =>{
     console.log(Response)
   });
-  
+
 }
 
 const handleChange = (e)=>{
