@@ -1,7 +1,11 @@
+
+
 label{
     text-align: center;
     
 }
+
+
 .main-container1{
     background-color: aquamarine;
     display: flex;
@@ -10,5 +14,6 @@ label{
     padding: 20px;
     border-radius: 25px;
     height: 400px;
-    margin-left: 30%;
+    margin-left: 15%;
+    margin-top: 5%;
 }

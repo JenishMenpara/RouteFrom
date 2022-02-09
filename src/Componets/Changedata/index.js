@@ -1,115 +1,148 @@
-/* import React from "react";
+import React from "react";
 import "./index.css";
-
-export default function Changedata() {
-  return (
-    <>
-      <div>
-        <p>hello ChangeData</p>
-      </div>
-    </>
-  );
-} */
-
-import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import './index.css';
 
-export default function Viewdata(props) {
-  const [ViewData, setViewData] = useState([]);
+export default function Updatedata() {
+  const { id } = useParams();
+
+  const [FirstName, setFirstName] = useState("");
+  const [LastName, setLastName] = useState("");
+  const [Age, setAge] = useState("");
+  const [CheckBox, setCheckBox] = useState({
+    Cricket: false,
+    Basketball: false,
+    Badminton: false,
+  });
+
+  const navigate = useNavigate();
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    const type = e.target.type;
+
+    if (name === "FirstName") {
+      setFirstName(value);
+    } else if (name === "LastName") {
+      setLastName(value);
+    } else if (type === "checkbox") {
+      setCheckBox((prvs) => ({ ...prvs, [name]: e.target.checked }));
+    } else {
+      setAge(value);
+    }
+  };
+
   useEffect(() => {
-    axios
-      .get("https://61fd0f51f62e220017ce42da.mockapi.io/user")
-      .then((response) => {
-        setViewData(response.data);
-      });
+    loadUser();
   }, []);
 
- const [Toggel, setToggel] = useState(false);
- const toggle = () => {
-  setToggel(!Toggel)
-}
+  const loadUser = async () => {
+    const result = await axios.get(
+      `https://61fd0f51f62e220017ce42da.mockapi.io/user/${id}`
+    );
+    setFirstName(result.data.FirstName);
+    setLastName(result.data.LastName);
+    setAge(result.data.Age);
+    setCheckBox(result.data.Hobbies);
+  };
 
+  const url = `https://61fd0f51f62e220017ce42da.mockapi.io/user/${id}`;
+  const editdata = () => {
+    axios
+      .put(url, {
+        FirstName: FirstName,
+        LastName: LastName,
+        Age: Age,
+        Hobbies: CheckBox,
+      })
+      .then((Response) => {
+        navigate("../Viewdata");
+      });
+  };
 
-const editdata=()=>{
-  console.log(ViewData)
-}
-
-  //console.log(userData);
-
-  const ShowData = ViewData.map((data) => {
-		return (
-			<tr>
-				<td>{data.id}</td>
-				<td>{data.FirstName}</td>
-				<td>{data.LastName}</td>
-				<td>{data.Age}</td>
-				<td>{data.Hobbies}</td>
-        <td>
-        <button name="" type="button" className="submitbtn" onClick={toggle}>
-            Update
-          </button>
-        </td>
-        
-			</tr>
-		);
-	});
-   
-
-
-  
-
-  return  (
+  return (
     <>
-
-      { Toggel=== true ? (
-      
-      
-      <form className="main-container1">
+      <label className="changedata">CHANGEDATA DATA</label>
+      <form className="main-container1" required>
         <label>UPDATE DATA</label>
         <div className="input-box">
           <label>First Name</label>
-          <input value=""/* onChange={handleChange} */ name="FirstName" type="text"></input>
+          <input
+            required
+            autoComplete="off"
+            value={FirstName}
+            onChange={handleChange}
+            name="FirstName"
+            type="text"
+          ></input>
         </div>
         <div className="input-box">
           <label>Last Name</label>
-          <input value="" /* onChange={handleChange} */ name="LastName" type="text"></input>
+          <input
+            required
+            autoComplete="off"
+            value={LastName}
+            onChange={handleChange}
+            name="LastName"
+            type="text"
+          ></input>
         </div>
         <hr />
         <div className="age-box">
           <label>Age</label>
-          <input value="" /* onChange={handleChange} */ name="Age" type="number"></input>
+          <input
+            required
+            value={Age}
+            onChange={handleChange}
+            name="Age"
+            type="number"
+          ></input>
         </div>
         <hr />
-        <div className="cheakbox" name="CheakBox" >
+        <div className="cheakbox">
           <label>Hobbies</label>
           <br />
-          Cricket<input type="checkbox" id="" name="sports" value="Cricket" /* onChange={handleChange} */ />
+          Cricket
+          <input
+            type="checkbox"
+            id="Cricket"
+            name="Cricket"
+            onChange={handleChange}
+            checked={CheckBox.Cricket}
+          />
           <br />
-          Basketball<input type="checkbox" id="" name="sports" value="Basketball" /* onChange={handleChange} *//>          
+          Basketball
+          <input
+            type="checkbox"
+            id="Basketball"
+            name="Basketball"
+            onChange={handleChange}
+            checked={CheckBox.Basketball}
+          />
           <br />
-          Badminton<input type="checkbox" id="" name="sports" value="Badminton" /* onChange={handleChange} */ />         
+          Badminton
+          <input
+            type="checkbox"
+            id="Badminton"
+            name="Badminton"
+            onChange={handleChange}
+            checked={CheckBox.Badminton}
+          />
           <br />
         </div>
         <hr />
         <div className="sub">
-          <button name="" type="button" className="submitbtn" onClick={(e)=>editdata(e.target.value)}>
+          <button
+            name=""
+            type="button"
+            className="submitbtn"
+            onClick={(e) => editdata(e.target.value)}
+          >
             Update Data
           </button>
         </div>
-      </form>) :<div className="table">
-        <table>
-          <tr>
-            <td>Id</td>
-            <td>Firstname</td>
-            <td>Lastname</td>
-            <td>Age</td>
-            <td>Hobbies</td>
-            <td>Update Data</td>
-          </tr>
-          {ShowData}
-        </table>
-      </div>}
+      </form>
     </>
   );
 }

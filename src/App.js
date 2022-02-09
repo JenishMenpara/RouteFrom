@@ -14,7 +14,7 @@ function App() {
 				<Routes>
 					<Route path="/" element={ <Sidebar/>}>
 						<Route path="/Createdata" element={<Createdata />} />
-						<Route path="/Changedata" element={<Changedata />} />
+						<Route path="/Changedata/:id" element={<Changedata />} />
 						<Route path="/Viewdata" element={<Viewdata />} />
 					</Route>
 				</Routes>
